@@ -6,88 +6,135 @@
     <title>Tech & IA Insights | Reseñas y Recomendaciones</title>
     <style>
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --bg: #0f172a;
-            --card-bg: #1e293b;
-            --text: #f8fafc;
-            --text-light: #94a3b8;
-            --border: #334155;
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.4);
+            --bg: #090d16;
+            --card-bg: #111827;
+            --text: #f3f4f6;
+            --text-light: #9ca3af;
+            --border: #1f2937;
+            --accent: #38bdf8;
         }
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg);
             color: var(--text);
-            max-width: 850px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 60px 20px;
-            line-height: 1.7;
+            padding: 50px 20px;
+            line-height: 1.6;
         }
         header {
             text-align: center;
             margin-bottom: 60px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 40px;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(56, 189, 248, 0.1) 100%);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
         header h1 {
             font-size: 3rem;
-            color: var(--text);
-            margin-bottom: 15px;
+            color: #ffffff;
+            margin-bottom: 12px;
             letter-spacing: -0.03em;
             font-weight: 800;
+            background: linear-gradient(to right, #ffffff, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         header p {
             color: var(--text-light);
-            font-size: 1.25rem;
-            max-width: 600px;
+            font-size: 1.2rem;
+            max-width: 650px;
             margin: 0 auto;
         }
         .posts-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
         }
         .post-card {
             background: var(--card-bg);
-            padding: 35px;
             border-radius: 20px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
         }
         .post-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.4);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px var(--primary-glow);
             border-color: var(--primary);
         }
+        .card-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+        .card-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .post-card:hover .card-image-wrapper img {
+            transform: scale(1.05);
+        }
+        .badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(8px);
+            color: var(--accent);
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 20px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .card-body {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
         .post-card h2 {
-            margin: 0 0 14px 0;
-            font-size: 1.75rem;
+            margin: 0 0 12px 0;
+            font-size: 1.35rem;
+            line-height: 1.4;
         }
         .post-card h2 a {
-            color: var(--text);
+            color: #ffffff;
             text-decoration: none;
             transition: color 0.2s;
         }
         .post-card h2 a:hover {
-            color: #60a5fa;
+            color: var(--accent);
         }
         .post-card p {
             color: var(--text-light);
-            margin: 0 0 25px 0;
-            font-size: 1.05rem;
+            margin: 0 0 20px 0;
+            font-size: 0.95rem;
+            flex-grow: 1;
         }
         .read-more {
             display: inline-flex;
             align-items: center;
             font-weight: 600;
-            color: #60a5fa;
+            color: var(--accent);
             text-decoration: none;
-            font-size: 1rem;
-            transition: color 0.2s;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
         }
         .read-more:hover {
-            color: #93c5fd;
+            opacity: 0.8;
             text-decoration: underline;
         }
         footer {
@@ -103,99 +150,201 @@
 <body>
     <header>
         <h1>Tech & IA Insights</h1>
-        <p>Las mejores herramientas, reseñas y guías seleccionadas para potenciar tu productividad.</p>
+        <p>Reseñas de software, análisis avanzados y las mejores herramientas seleccionadas para potenciar tu productividad.</p>
     </header>
     <main class="posts-grid">
         
-    <article class="post-card">
-        <h2><a href="posts/articulo-2026-09-04-16-52.md">Articulo 2026 09 04 16 52</a></h2>
-        <p>¿Alguna vez has sentido que el día no tiene suficientes horas? Llegas a tu escritorio con una lista infinita de tareas, abres diez pestañas diferentes...</p>
-        <a href="posts/articulo-2026-09-04-16-52.md" class="read-more">Leer artículo completo &rarr;</a>
-    </article>
+    <div class="post-card">
+        <div class="card-image-wrapper">
+            <img src="https://picsum.photos/seed/articulo-2026-09-04-18-04/700/400" alt="Deja de perder el tiempo: Cómo Notion AI puede duplicar tu productividad desde hoy" loading="lazy">
+            <span class="badge">Inteligencia Artificial</span>
+        </div>
+        <div class="card-body">
+            <h2><a href="posts/articulo-2026-09-04-18-04.html">Deja de perder el tiempo: Cómo Notion AI puede duplicar tu productividad desde hoy</a></h2>
+            <p>¿Sientes que el día no tiene suficientes horas? Pasar de una pestaña a otra, redactar correos interminables, resumir reuniones de una hora y...</p>
+            <a href="posts/articulo-2026-09-04-18-04.html" class="read-more">Leer artículo completo &rarr;</a>
+        </div>
+    </div>
     
-    <article class="post-card">
-        <h2><a href="posts/articulo-2026-09-04-15-44.md">Articulo 2026 09 04 15 44</a></h2>
-        <p>Trabajar duro ya no es suficiente; hoy en día el secreto está en trabajar de forma inteligente. Pasas horas redactando correos, organizando proyectos,...</p>
-        <a href="posts/articulo-2026-09-04-15-44.md" class="read-more">Leer artículo completo &rarr;</a>
-    </article>
+    <div class="post-card">
+        <div class="card-image-wrapper">
+            <img src="https://picsum.photos/seed/articulo-2026-09-04-16-52/700/400" alt="Deja de perder 10 horas a la semana: Cómo Notion AI se convirtió en mi superpoder de productividad" loading="lazy">
+            <span class="badge">Inteligencia Artificial</span>
+        </div>
+        <div class="card-body">
+            <h2><a href="posts/articulo-2026-09-04-16-52.html">Deja de perder 10 horas a la semana: Cómo Notion AI se convirtió en mi superpoder de productividad</a></h2>
+            <p>¿Alguna vez has sentido que el día no tiene suficientes horas? Llegas a tu escritorio con una lista infinita de tareas, abres diez pestañas ...</p>
+            <a href="posts/articulo-2026-09-04-16-52.html" class="read-more">Leer artículo completo &rarr;</a>
+        </div>
+    </div>
     
-    <article class="post-card">
-        <h2><a href="posts/articulo-2026-09-04-15-35.md">Articulo 2026 09 04 15 35</a></h2>
-        <p>Llegas a la oficina, abres el correo, miras una lista de tareas interminable y, antes de que te des cuenta, ya son las 6 de la tarde y sientes que no ...</p>
-        <a href="posts/articulo-2026-09-04-15-35.md" class="read-more">Leer artículo completo &rarr;</a>
-    </article>
+    <div class="post-card">
+        <div class="card-image-wrapper">
+            <img src="https://picsum.photos/seed/articulo-2026-09-04-15-44/700/400" alt="¿Sientes que el tiempo no te alcanza? Descubre cómo Notion AI puede devolverte 10 horas a la semana" loading="lazy">
+            <span class="badge">Inteligencia Artificial</span>
+        </div>
+        <div class="card-body">
+            <h2><a href="posts/articulo-2026-09-04-15-44.html">¿Sientes que el tiempo no te alcanza? Descubre cómo Notion AI puede devolverte 10 horas a la semana</a></h2>
+            <p>Trabajar duro ya no es suficiente; hoy en día el secreto está en trabajar de forma inteligente. Pasas horas redactando correos, organizando ...</p>
+            <a href="posts/articulo-2026-09-04-15-44.html" class="read-more">Leer artículo completo &rarr;</a>
+        </div>
+    </div>
     
-    <article class="post-card">
-        <h2><a href="posts/articulo-2026-09-04-14-39.md">Articulo 2026 09 04 14 39</a></h2>
-        <p>¿Sientes que el día no tiene suficientes horas? Pasar de una pestaña a otra, intentar redactar el correo perfecto, organizar notas caóticas y enfrenta...</p>
-        <a href="posts/articulo-2026-09-04-14-39.md" class="read-more">Leer artículo completo &rarr;</a>
-    </article>
+    <div class="post-card">
+        <div class="card-image-wrapper">
+            <img src="https://picsum.photos/seed/articulo-2026-09-04-15-35/700/400" alt="¿Sientes que el día no te alcanza? Descubre la IA que recupera 2 horas diarias de tu tiempo" loading="lazy">
+            <span class="badge">Inteligencia Artificial</span>
+        </div>
+        <div class="card-body">
+            <h2><a href="posts/articulo-2026-09-04-15-35.html">¿Sientes que el día no te alcanza? Descubre la IA que recupera 2 horas diarias de tu tiempo</a></h2>
+            <p>Llegas a la oficina, abres el correo, miras una lista de tareas interminable y, antes de que te des cuenta, ya son las 6 de la tarde y sient...</p>
+            <a href="posts/articulo-2026-09-04-15-35.html" class="read-more">Leer artículo completo &rarr;</a>
+        </div>
+    </div>
     
-    <article class="post-card">
-        <h2><a href="posts/articulo-2026-09-04-14-31.md">Articulo 2026 09 04 14 31</a></h2>
-        <p>El tiempo es el recurso más valioso que tienes, pero la mayoría de los profesionales pasan hasta un 40% de su jornada laboral atrapados en tareas admi...</p>
-        <a href="posts/articulo-2026-09-04-14-31.md" class="read-more">Leer artículo completo &rarr;</a>
-    </article>
+    <div class="post-card">
+        <div class="card-image-wrapper">
+            <img src="https://picsum.photos/seed/articulo-2026-09-04-14-39/700/400" alt="Deja de Perder el Tiempo: Cómo Notion AI Puede Multiplicar tu Productividad por 10 Hoy Mismo" loading="lazy">
+            <span class="badge">Inteligencia Artificial</span>
+        </div>
+        <div class="card-body">
+            <h2><a href="posts/articulo-2026-09-04-14-39.html">Deja de Perder el Tiempo: Cómo Notion AI Puede Multiplicar tu Productividad por 10 Hoy Mismo</a></h2>
+            <p>¿Sientes que el día no tiene suficientes horas? Pasar de una pestaña a otra, intentar redactar el correo perfecto, organizar notas caóticas ...</p>
+            <a href="posts/articulo-2026-09-04-14-39.html" class="read-more">Leer artículo completo &rarr;</a>
+        </div>
+    </div>
     
-    <article class="post-card">
-        <h2><a href="posts/articulo-2026-09-04-14-25.md">Articulo 2026 09 04 14 25</a></h2>
-        <p>¿Sientes que las 24 horas del día no son suficientes para cubrir tus pendientes? Pasar de una aplicación a otra, redactar correos infinitos, resumir r...</p>
-        <a href="posts/articulo-2026-09-04-14-25.md" class="read-more">Leer artículo completo &rarr;</a>
-    </article>
+    <div class="post-card">
+        <div class="card-image-wrapper">
+            <img src="https://picsum.photos/seed/articulo-2026-09-04-14-31/700/400" alt="¿Sigues perdiendo horas en tareas repetitivas? Descubre cómo Notion AI puede multiplicarla por diez tu productividad hoy mismo" loading="lazy">
+            <span class="badge">Inteligencia Artificial</span>
+        </div>
+        <div class="card-body">
+            <h2><a href="posts/articulo-2026-09-04-14-31.html">¿Sigues perdiendo horas en tareas repetitivas? Descubre cómo Notion AI puede multiplicarla por diez tu productividad hoy mismo</a></h2>
+            <p>El tiempo es el recurso más valioso que tienes, pero la mayoría de los profesionales pasan hasta un 40% de su jornada laboral atrapados en t...</p>
+            <a href="posts/articulo-2026-09-04-14-31.html" class="read-more">Leer artículo completo &rarr;</a>
+        </div>
+    </div>
     
-    <article class="post-card">
-        <h2><a href="posts/articulo-2026-09-04-14-23.md">Articulo 2026 09 04 14 23</a></h2>
-        <p>¿Alguna vez has sentido que el día no tiene suficientes horas para cubrir todas tus pendientes? Trabajas sin parar, pero al final de la jornada la lis...</p>
-        <a href="posts/articulo-2026-09-04-14-23.md" class="read-more">Leer artículo completo &rarr;</a>
-    </article>
+    <div class="post-card">
+        <div class="card-image-wrapper">
+            <img src="https://picsum.photos/seed/articulo-2026-09-04-14-25/700/400" alt="Dile adiós al caos laboral: Cómo Notion AI transforma tu productividad en segundos" loading="lazy">
+            <span class="badge">Inteligencia Artificial</span>
+        </div>
+        <div class="card-body">
+            <h2><a href="posts/articulo-2026-09-04-14-25.html">Dile adiós al caos laboral: Cómo Notion AI transforma tu productividad en segundos</a></h2>
+            <p>¿Sientes que las 24 horas del día no son suficientes para cubrir tus pendientes? Pasar de una aplicación a otra, redactar correos infinitos,...</p>
+            <a href="posts/articulo-2026-09-04-14-25.html" class="read-more">Leer artículo completo &rarr;</a>
+        </div>
+    </div>
     
-    <article class="post-card">
-        <h2><a href="posts/articulo-2026-09-04-1354.md">Articulo 2026 09 04 1354</a></h2>
-        <p>El mundo del desarrollo de software cambia a pasos agigantados. Hoy en día, la Inteligencia Artificial no ha venido a reemplazar a los programadores, ...</p>
-        <a href="posts/articulo-2026-09-04-1354.md" class="read-more">Leer artículo completo &rarr;</a>
-    </article>
+    <div class="post-card">
+        <div class="card-image-wrapper">
+            <img src="https://picsum.photos/seed/articulo-2026-09-04-14-23/700/400" alt="¿Sigues perdiendo horas en tareas repetitivas? Descubre Notion AI, la herramienta que revolucionará tu productividad" loading="lazy">
+            <span class="badge">Inteligencia Artificial</span>
+        </div>
+        <div class="card-body">
+            <h2><a href="posts/articulo-2026-09-04-14-23.html">¿Sigues perdiendo horas en tareas repetitivas? Descubre Notion AI, la herramienta que revolucionará tu productividad</a></h2>
+            <p>¿Alguna vez has sentido que el día no tiene suficientes horas para cubrir todas tus pendientes? Trabajas sin parar, pero al final de la jorn...</p>
+            <a href="posts/articulo-2026-09-04-14-23.html" class="read-more">Leer artículo completo &rarr;</a>
+        </div>
+    </div>
     
-    <article class="post-card">
-        <h2><a href="posts/articulo-2026-09-04-1350.md">Articulo 2026 09 04 1350</a></h2>
-        <p>Iniciar una carrera en el desarrollo de software puede sentirse abrumador. La cantidad de lenguajes, *frameworks* y buenas prácticas que hay que apren...</p>
-        <a href="posts/articulo-2026-09-04-1350.md" class="read-more">Leer artículo completo &rarr;</a>
-    </article>
+    <div class="post-card">
+        <div class="card-image-wrapper">
+            <img src="https://picsum.photos/seed/articulo-2026-09-04-1354/700/400" alt="Acelera tu carrera tech: Las 3 herramientas de IA indispensables para desarrolladores junior" loading="lazy">
+            <span class="badge">Inteligencia Artificial</span>
+        </div>
+        <div class="card-body">
+            <h2><a href="posts/articulo-2026-09-04-1354.html">Acelera tu carrera tech: Las 3 herramientas de IA indispensables para desarrolladores junior</a></h2>
+            <p>El mundo del desarrollo de software cambia a pasos agigantados. Hoy en día, la Inteligencia Artificial no ha venido a reemplazar a los progr...</p>
+            <a href="posts/articulo-2026-09-04-1354.html" class="read-more">Leer artículo completo &rarr;</a>
+        </div>
+    </div>
     
-    <article class="post-card">
-        <h2><a href="posts/articulo-2026-09-04-1346.md">Articulo 2026 09 04 1346</a></h2>
-        <p>Dar los primeros pasos en el mundo del desarrollo de software puede ser abrumador. La cantidad de lenguajes, *frameworks* y buenas prácticas que debes...</p>
-        <a href="posts/articulo-2026-09-04-1346.md" class="read-more">Leer artículo completo &rarr;</a>
-    </article>
+    <div class="post-card">
+        <div class="card-image-wrapper">
+            <img src="https://picsum.photos/seed/articulo-2026-09-04-1350/700/400" alt="🚀 Herramientas de IA Indispensables para Desarrolladores Junior en 2024" loading="lazy">
+            <span class="badge">Inteligencia Artificial</span>
+        </div>
+        <div class="card-body">
+            <h2><a href="posts/articulo-2026-09-04-1350.html">🚀 Herramientas de IA Indispensables para Desarrolladores Junior en 2024</a></h2>
+            <p>Iniciar una carrera en el desarrollo de software puede sentirse abrumador. La cantidad de lenguajes, *frameworks* y buenas prácticas que hay...</p>
+            <a href="posts/articulo-2026-09-04-1350.html" class="read-more">Leer artículo completo &rarr;</a>
+        </div>
+    </div>
     
-    <article class="post-card">
-        <h2><a href="posts/articulo-2026-09-04-1341.md">Articulo 2026 09 04 1341</a></h2>
-        <p>Iniciar una carrera en el desarrollo de software puede sentirse abrumador. Entre aprender nuevas sintaxis, entender arquitecturas complejas y hacer *d...</p>
-        <a href="posts/articulo-2026-09-04-1341.md" class="read-more">Leer artículo completo &rarr;</a>
-    </article>
+    <div class="post-card">
+        <div class="card-image-wrapper">
+            <img src="https://picsum.photos/seed/articulo-2026-09-04-1346/700/400" alt="5 Herramientas de IA Indispensables para Desarrolladores Junior (Acelera tu Aprendizaje)" loading="lazy">
+            <span class="badge">Inteligencia Artificial</span>
+        </div>
+        <div class="card-body">
+            <h2><a href="posts/articulo-2026-09-04-1346.html">5 Herramientas de IA Indispensables para Desarrolladores Junior (Acelera tu Aprendizaje)</a></h2>
+            <p>Dar los primeros pasos en el mundo del desarrollo de software puede ser abrumador. La cantidad de lenguajes, *frameworks* y buenas prácticas...</p>
+            <a href="posts/articulo-2026-09-04-1346.html" class="read-more">Leer artículo completo &rarr;</a>
+        </div>
+    </div>
     
-    <article class="post-card">
-        <h2><a href="posts/articulo-2026-09-04-1332.md">Articulo 2026 09 04 1332</a></h2>
-        <p>Iniciar una carrera en el mundo de la programación puede sentirse abrumador. Entre aprender nuevos lenguajes, entender arquitecturas complejas y soluc...</p>
-        <a href="posts/articulo-2026-09-04-1332.md" class="read-more">Leer artículo completo &rarr;</a>
-    </article>
+    <div class="post-card">
+        <div class="card-image-wrapper">
+            <img src="https://picsum.photos/seed/articulo-2026-09-04-1341/700/400" alt="Acelera tu carrera: Las 4 herramientas de IA indispensables para desarrolladores junior" loading="lazy">
+            <span class="badge">Inteligencia Artificial</span>
+        </div>
+        <div class="card-body">
+            <h2><a href="posts/articulo-2026-09-04-1341.html">Acelera tu carrera: Las 4 herramientas de IA indispensables para desarrolladores junior</a></h2>
+            <p>Iniciar una carrera en el desarrollo de software puede sentirse abrumador. Entre aprender nuevas sintaxis, entender arquitecturas complejas ...</p>
+            <a href="posts/articulo-2026-09-04-1341.html" class="read-more">Leer artículo completo &rarr;</a>
+        </div>
+    </div>
     
-    <article class="post-card">
-        <h2><a href="posts/articulo-2026-09-04-1315.md">Articulo 2026 09 04 1315</a></h2>
-        <p>El mundo del desarrollo de software evoluciona a pasos agigantados. Hoy en día, la Inteligencia Artificial no ha venido a reemplazar a los programador...</p>
-        <a href="posts/articulo-2026-09-04-1315.md" class="read-more">Leer artículo completo &rarr;</a>
-    </article>
+    <div class="post-card">
+        <div class="card-image-wrapper">
+            <img src="https://picsum.photos/seed/articulo-2026-09-04-1332/700/400" alt="Las 4 Herramientas de IA Indispensables para Desarrolladores Junior" loading="lazy">
+            <span class="badge">Inteligencia Artificial</span>
+        </div>
+        <div class="card-body">
+            <h2><a href="posts/articulo-2026-09-04-1332.html">Las 4 Herramientas de IA Indispensables para Desarrolladores Junior</a></h2>
+            <p>Iniciar una carrera en el mundo de la programación puede sentirse abrumador. Entre aprender nuevos lenguajes, entender arquitecturas complej...</p>
+            <a href="posts/articulo-2026-09-04-1332.html" class="read-more">Leer artículo completo &rarr;</a>
+        </div>
+    </div>
     
-    <article class="post-card">
-        <h2><a href="posts/articulo-2026-09-04-1311.md">Articulo 2026 09 04 1311</a></h2>
-        <p>Entrar al mundo del desarrollo de software puede sentirse abrumador. Entre aprender nuevos lenguajes, entender arquitecturas y lidiar con *bugs* frust...</p>
-        <a href="posts/articulo-2026-09-04-1311.md" class="read-more">Leer artículo completo &rarr;</a>
-    </article>
+    <div class="post-card">
+        <div class="card-image-wrapper">
+            <img src="https://picsum.photos/seed/articulo-2026-09-04-1315/700/400" alt="🚀 Top Herramientas de IA que Todo Desarrollador Junior Debe Usar para Acelerar su Carrera" loading="lazy">
+            <span class="badge">Inteligencia Artificial</span>
+        </div>
+        <div class="card-body">
+            <h2><a href="posts/articulo-2026-09-04-1315.html">🚀 Top Herramientas de IA que Todo Desarrollador Junior Debe Usar para Acelerar su Carrera</a></h2>
+            <p>El mundo del desarrollo de software evoluciona a pasos agigantados. Hoy en día, la Inteligencia Artificial no ha venido a reemplazar a los p...</p>
+            <a href="posts/articulo-2026-09-04-1315.html" class="read-more">Leer artículo completo &rarr;</a>
+        </div>
+    </div>
     
-    <article class="post-card">
-        <h2><a href="posts/articulo-2026-09-04-1229.md">Articulo 2026 09 04 1229</a></h2>
-        <p>El sector del desarrollo de software evoluciona a un ritmo frenético. Para un **desarrollador junior**, dar los primeros pasos puede sentirse abrumado...</p>
-        <a href="posts/articulo-2026-09-04-1229.md" class="read-more">Leer artículo completo &rarr;</a>
-    </article>
+    <div class="post-card">
+        <div class="card-image-wrapper">
+            <img src="https://picsum.photos/seed/articulo-2026-09-04-1311/700/400" alt="Acelera tu Carrera: 4 Herramientas de IA Indispensables para Desarrolladores Junior" loading="lazy">
+            <span class="badge">Inteligencia Artificial</span>
+        </div>
+        <div class="card-body">
+            <h2><a href="posts/articulo-2026-09-04-1311.html">Acelera tu Carrera: 4 Herramientas de IA Indispensables para Desarrolladores Junior</a></h2>
+            <p>Entrar al mundo del desarrollo de software puede sentirse abrumador. Entre aprender nuevos lenguajes, entender arquitecturas y lidiar con *b...</p>
+            <a href="posts/articulo-2026-09-04-1311.html" class="read-more">Leer artículo completo &rarr;</a>
+        </div>
+    </div>
+    
+    <div class="post-card">
+        <div class="card-image-wrapper">
+            <img src="https://picsum.photos/seed/articulo-2026-09-04-1229/700/400" alt="🚀 Herramientas de IA Indispensables para Desarrolladores Junior en 2024" loading="lazy">
+            <span class="badge">Inteligencia Artificial</span>
+        </div>
+        <div class="card-body">
+            <h2><a href="posts/articulo-2026-09-04-1229.html">🚀 Herramientas de IA Indispensables para Desarrolladores Junior en 2024</a></h2>
+            <p>El sector del desarrollo de software evoluciona a un ritmo frenético. Para un **desarrollador junior**, dar los primeros pasos puede sentirs...</p>
+            <a href="posts/articulo-2026-09-04-1229.html" class="read-more">Leer artículo completo &rarr;</a>
+        </div>
+    </div>
     
     </main>
     <footer>
