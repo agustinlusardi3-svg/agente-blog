@@ -14,6 +14,7 @@ html_content = f"""<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agente Blog - Tecnología e IA</title>
+    <meta name='impact-site-verification' value='19d4fe8e-745b-4002-b016-3f8489d750a0'>
     <script type="text/javascript">(function(i,m,p,a,c,t){{c.ire_o=p;c[p]=c[p]||function(){{(c[p].a=c[p].a||[]).push(arguments)}};t=a.createElement(m);var z=a.getElementsByTagName(m)[0];t.async=1;t.src=i;z.parentNode.insertBefore(t,z)}})('https://utt.impactcdn.com/P-A7728736-5948-45ab-a804-68dc0154b9d71.js','script','impactStat',document,window);impactStat('transformLinks');impactStat('trackImpression');</script>
     <style>
         body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 700px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #333; }}
