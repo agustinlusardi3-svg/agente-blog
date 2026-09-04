@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Copiar repositorio
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Configurar Python
         uses: actions/setup-python@v5
@@ -20,17 +22,20 @@ jobs:
           python-version: '3.10'
 
       - name: Instalar dependencias
-        run: pip install -r requirements.txt
+        run: pip install google-genai
 
-      - name: Ejecutar script de IA
+      - name: Ejecutar agente generador
+        run: python main.py
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python main.py
 
-      - name: Guardar cambios en el repositorio
+      - name: Generar la página web (HTML)
+        run: python build.py
+
+      - name: Subir cambios a GitHub
         run: |
-          git config --global user.name 'Bot Generador'
-          git config --global user.email 'bot@users.noreply.github.com'
-          git add posts/
-          git commit -m "Nuevo artículo generado automáticamente por IA"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Auto-generar nuevo artículo y actualizar web" || exit 0
           git push
