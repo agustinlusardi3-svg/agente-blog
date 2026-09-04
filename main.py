@@ -1,6 +1,8 @@
 import os
 import datetime
+import time
 from google import genai
+from google.genai.errors import ServerError
 
 api_key = os.environ.get("GEMINI_API_KEY")
 if not api_key:
@@ -11,29 +13,44 @@ client = genai.Client(api_key=api_key)
 MODEL_NAME = "gemini-3.6-flash"
 print(f"Intentando generar contenido con el modelo {MODEL_NAME}...")
 
-try:
-    prompt = """
-    Escribe un artículo de blog persuasivo, moderno y con enfoque de conversión sobre una herramienta de Inteligencia Artificial o software de productividad.
-    
-    Sigue estrictamente esta estructura:
-    1. Un título llamativo y directo (en formato Markdown #).
-    2. Una introducción que enganche al lector.
-    3. Subtítulos claros (##) que desarrollen las características principales.
-    4. Viñetas (-) resaltando los beneficios clave.
-    5. Un párrafo final de conclusión con un Llamado a la Acción (CTA) invitando a probar la herramienta mediante un enlace de afiliado (ejemplo: [Accede aquí con descuento especial](TUS_HOTLINKS_AQUÍ)).
-    
-    Escribe todo en formato Markdown limpio y en idioma español. No agregues texto introductorio fuera del artículo.
-    """
-    
-    response = client.models.generate_content(
-        model=MODEL_NAME,
-        contents=prompt,
-    )
-    contenido_markdown = response.text
+prompt = """
+Escribe un artículo de blog persuasivo, moderno y con enfoque de conversión sobre una herramienta de Inteligencia Artificial o software de productividad.
 
-except Exception as e:
-    print(f"Error al conectar con el modelo: {e}")
-    raise e
+Sigue estrictamente esta estructura:
+1. Un título llamativo y directo (en formato Markdown #).
+2. Una introducción que enganche al lector.
+3. Subtítulos claros (##) que desarrollen las características principales.
+4. Viñetas (-) resaltando los beneficios clave.
+5. Un párrafo final de conclusión con un Llamado a la Acción (CTA) invitando a probar la herramienta mediante un enlace de afiliado (ejemplo: [Accede aquí con descuento especial](TUS_HOTLINKS_AQUÍ)).
+
+Escribe todo en formato Markdown limpio y en idioma español. No agregues texto introductorio fuera del artículo.
+"""
+
+# Intentar hasta 3 veces en caso de alta demanda (Error 503)
+intentos = 3
+exito = False
+contenido_markdown = ""
+
+for intento in range(1, intentos + 1):
+    try:
+        response = client.models.generate_content(
+            model=MODEL_NAME,
+            contents=prompt,
+        )
+        contenido_markdown = response.text
+        exito = True
+        break
+    except ServerError as e:
+        print(f"Intento {intento} fallido por alta demanda (503). Reintentando en 5 segundos...")
+        if intento == intentos:
+            raise e
+        time.sleep(5)
+    except Exception as e:
+        print(f"Error inesperado al conectar con el modelo: {e}")
+        raise e
+
+if not exito:
+    raise Exception("No se pudo generar contenido tras varios intentos debido a la alta demanda.")
 
 os.makedirs("posts", exist_ok=True)
 
