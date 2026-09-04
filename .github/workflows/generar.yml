@@ -1,9 +1,9 @@
 name: Build Blog and Generate Content
 
 on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
+  schedule:
+    - cron: '0 9 * * *' # Se ejecuta automáticamente todos los días a las 09:00 UTC
+  workflow_dispatch: # Te permite mantener el botón para lanzarlo manualmente cuando lo desees
 
 permissions:
   contents: write
