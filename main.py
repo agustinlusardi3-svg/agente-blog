@@ -26,9 +26,9 @@ Estructura el texto en formato Markdown con un título llamativo (H1), subtítul
 Al final del artículo, añade de forma natural una recomendación útil con un enlace de afiliado genérico.
 """
 
-# Llamada a la IA usando el modelo actual disponible
+# Llamada a la IA usando el modelo actual requerido
 response = client.models.generate_content(
-    model="gemini-2.0-flash",
+    model="gemini-3.6-flash",
     contents=prompt,
 )
 
