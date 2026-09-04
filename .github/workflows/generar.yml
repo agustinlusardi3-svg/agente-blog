@@ -1,15 +1,17 @@
-name: Generador Automático de Contenido
+name: Build Blog and Generate Content
 
 on:
-  schedule:
-    - cron: '0 8 * * *' # Se ejecuta todos los días a las 8 AM
-  workflow_dispatch: # Permite ejecutarlo manualmente cuando quieras
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
-  generar:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+
     steps:
       - name: Checkout repositorio
         uses: actions/checkout@v3
@@ -25,25 +27,15 @@ jobs:
           pip install -r requirements.txt
 
       - name: Ejecutar script de contenido
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python main.py
 
       - name: Ejecutar script de compilación web
         run: python build.py
 
-      - name: Subir cambios a GitHub Pages
+      - name: Subir cambios al repositorio
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "Automated blog update: new post and build"
           branch: main
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-
-      - name: Generar la página web (HTML)
-        run: python build.py
-
-      - name: Subir cambios a GitHub
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "Auto-generar nuevo artículo y actualizar web" || exit 0
-          git push
