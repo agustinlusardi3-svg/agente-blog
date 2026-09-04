@@ -3,7 +3,11 @@ import datetime
 from google import genai
 
 # Configura tu clave de API desde las variables secretas de la nube
-client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+api_key = os.environ.get("GEMINI_API_KEY")
+if not api_key:
+    raise ValueError("No se encontró la variable de entorno GEMINI_API_KEY")
+
+client = genai.Client(api_key=api_key)
 
 # Lista de temas que el bot irá alternando
 temas = [
@@ -12,9 +16,9 @@ temas = [
     "Cómo estructurar bases de datos relacionales sin morir en el intento"
 ]
 
-# Seleccionar un tema basado en el día actual
-dia_del_anio = datetime.datetime.now().timetuple().tm_yday
-tema_actual = temas[dia_del_anio % len(temas)]
+# Seleccionar un tema de forma segura usando el día del mes
+dia_actual = datetime.datetime.now().day
+tema_actual = temas[dia_actual % len(temas)]
 
 prompt = f"""
 Escribe un artículo de blog corto, útil y optimizado para SEO sobre: '{tema_actual}'.
@@ -28,8 +32,8 @@ response = client.models.generate_content(
     contents=prompt,
 )
 
-# Generar nombre de archivo único basado en la fecha
-fecha_str = datetime.datetime.now().strftime("%Y-%m-%d")
+# Generar nombre de archivo único basado en la fecha actual
+fecha_str = datetime.datetime.now().strftime("%Y-%m-%d-%H%M")
 nombre_archivo = f"posts/articulo-{fecha_str}.md"
 
 # Asegurar que la carpeta posts exista
