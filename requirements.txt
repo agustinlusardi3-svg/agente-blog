@@ -1,4 +1,5 @@
-google-genai
-requests
+
 google-generativeai
+markdown
+google-genai
 markdown
