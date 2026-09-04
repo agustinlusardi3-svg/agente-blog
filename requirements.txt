@@ -1,5 +1,2 @@
-
-google-generativeai
-markdown
 google-genai
 markdown
