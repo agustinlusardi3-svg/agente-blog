@@ -8,7 +8,7 @@ if not api_key:
 
 client = genai.Client(api_key=api_key)
 
-MODEL_NAME = "gemini-2.0-flash"
+MODEL_NAME = "gemini-3.6-flash"
 print(f"Intentando generar contenido con el modelo {MODEL_NAME}...")
 
 try:
