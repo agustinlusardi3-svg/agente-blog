@@ -1,19 +1,17 @@
 import os
 import datetime
-import google.generativeai as genai
+from google import genai
 
 api_key = os.environ.get("GEMINI_API_KEY")
 if not api_key:
     raise ValueError("No se encontró la GEMINI_API_KEY en las variables de entorno.")
 
-genai.configure(api_key=api_key)
+client = genai.Client(api_key=api_key)
 
-MODEL_NAME = "gemini-1.5-flash"
+MODEL_NAME = "gemini-2.0-flash"
 print(f"Intentando generar contenido con el modelo {MODEL_NAME}...")
 
 try:
-    model = genai.GenerativeModel(MODEL_NAME)
-    
     prompt = """
     Escribe un artículo de blog persuasivo, moderno y con enfoque de conversión (tipo reseña o recomendación de valor) sobre una herramienta de Inteligencia Artificial o software de productividad muy útil actualmente.
     
@@ -27,7 +25,10 @@ try:
     Escribe todo el contenido en formato Markdown limpio y en idioma español. No agregues texto introductorio fuera del artículo.
     """
     
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(
+        model=MODEL_NAME,
+        contents=prompt,
+    )
     contenido_markdown = response.text
 
 except Exception as e:
