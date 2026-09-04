@@ -13,16 +13,16 @@ print(f"Intentando generar contenido con el modelo {MODEL_NAME}...")
 
 try:
     prompt = """
-    Escribe un artículo de blog persuasivo, moderno y con enfoque de conversión (tipo reseña o recomendación de valor) sobre una herramienta de Inteligencia Artificial o software de productividad muy útil actualmente.
+    Escribe un artículo de blog persuasivo, moderno y con enfoque de conversión sobre una herramienta de Inteligencia Artificial o software de productividad.
     
     Sigue estrictamente esta estructura:
     1. Un título llamativo y directo (en formato Markdown #).
-    2. Una introducción que enganche al lector conectando con un problema real.
-    3. Subtítulos claros (##) que desarrollen las características principales y beneficios clave.
-    4. Viñetas (-) resaltando por qué vale la pena usarla.
-    5. Un párrafo final de conclusión con un Llamado a la Acción (CTA) muy persuasivo que invite a hacer clic y adquirir la herramienta recomendada a través de un enlace de afiliado (deja el enlace preparado con este formato de ejemplo: [Accede aquí con descuento especial](TUS_HOTLINKS_AQUÍ)).
+    2. Una introducción que enganche al lector.
+    3. Subtítulos claros (##) que desarrollen las características principales.
+    4. Viñetas (-) resaltando los beneficios clave.
+    5. Un párrafo final de conclusión con un Llamado a la Acción (CTA) invitando a probar la herramienta mediante un enlace de afiliado (ejemplo: [Accede aquí con descuento especial](TUS_HOTLINKS_AQUÍ)).
     
-    Escribe todo el contenido en formato Markdown limpio y en idioma español. No agregues texto introductorio fuera del artículo.
+    Escribe todo en formato Markdown limpio y en idioma español. No agregues texto introductorio fuera del artículo.
     """
     
     response = client.models.generate_content(
