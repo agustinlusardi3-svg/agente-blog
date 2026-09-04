@@ -10,7 +10,7 @@ if not api_key:
 
 client = genai.Client(api_key=api_key)
 
-MODEL_NAME = "gemini-2.5-flash"
+MODEL_NAME = "gemini-3.6-flash"
 print(f"Intentando generar contenido con el modelo {MODEL_NAME}...")
 
 prompt = """
@@ -26,7 +26,7 @@ Sigue estrictamente esta estructura:
 Escribe todo en formato Markdown limpio y en idioma español. No agregues texto introductorio fuera del artículo.
 """
 
-intentos = 3
+intentos = 5
 exito = False
 contenido_markdown = ""
 
@@ -40,10 +40,11 @@ for intento in range(1, intentos + 1):
         exito = True
         break
     except ServerError as e:
-        print(f"Intento {intento} fallido por alta demanda (503). Reintentando en 5 segundos...")
+        tiempo_espera = intento * 8  # Espera progresiva: 8s, 16s, 24s, 32s...
+        print(f"Intento {intento} fallido por alta demanda (503). Reintentando en {tiempo_espera} segundos...")
         if intento == intentos:
             raise e
-        time.sleep(5)
+        time.sleep(tiempo_espera)
     except Exception as e:
         print(f"Error inesperado al conectar con el modelo: {e}")
         raise e
