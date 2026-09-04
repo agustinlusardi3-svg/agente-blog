@@ -24,8 +24,8 @@ Estructura el texto en formato Markdown con un título llamativo (H1), subtítul
 Al final del artículo, añade de forma natural una recomendación útil con un enlace de afiliado genérico.
 """
 
-# Lista de modelos de respaldo por si uno presenta alta demanda
-modelos_a_probar = ["gemini-1.5-flash", "gemini-2.0-flash"]
+# Usar el modelo activo requerido por la API actual
+modelos_a_probar = ["gemini-3.6-flash"]
 response = None
 
 for modelo in modelos_a_probar:
@@ -41,7 +41,7 @@ for modelo in modelos_a_probar:
         time.sleep(3)
 
 if not response:
-    raise Exception("Todos los modelos reportaron alta demanda temporal. Intenta ejecutarlo nuevamente en unos minutos.")
+    raise Exception("No se pudo conectar con el modelo de IA. Verifica los registros.")
 
 fecha_str = datetime.datetime.now().strftime("%Y-%m-%d-%H%M")
 nombre_archivo = f"posts/articulo-{fecha_str}.md"
