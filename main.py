@@ -13,7 +13,7 @@ temas = [
 ]
 
 # Seleccionar un tema basado en el día actual
-dia_del_anio = datetime.datetime.now().timetuple().yday
+dia_del_anio = datetime.datetime.now().timetuple().tm_yday
 tema_actual = temas[dia_del_anio % len(temas)]
 
 prompt = f"""
