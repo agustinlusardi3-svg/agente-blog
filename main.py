@@ -10,7 +10,7 @@ if not api_key:
 
 client = genai.Client(api_key=api_key)
 
-MODEL_NAME = "gemini-3.6-flash"
+MODEL_NAME = "gemini-2.5-flash"
 print(f"Intentando generar contenido con el modelo {MODEL_NAME}...")
 
 prompt = """
@@ -26,7 +26,6 @@ Sigue estrictamente esta estructura:
 Escribe todo en formato Markdown limpio y en idioma español. No agregues texto introductorio fuera del artículo.
 """
 
-# Intentar hasta 3 veces en caso de alta demanda (Error 503)
 intentos = 3
 exito = False
 contenido_markdown = ""
